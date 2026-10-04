@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  lesson: one
+  activity: one
+  progress_percent: 1
+  is_completed: false
+  last_video_position: 1
+
+two:
+  user: two
+  lesson: two
+  activity: two
+  progress_percent: 1
+  is_completed: false
+  last_video_position: 1

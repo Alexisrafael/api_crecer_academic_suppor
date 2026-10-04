@@ -1,0 +1,7 @@
+es:
+  api:
+    auth:
+      invalid_email_password: "Correo o contraseña inválidos"
+      invalid_token_type: "Tipo de token inválido"
+      invalid_or_expired_refresh_token: "Token de refresco inválido o expirado"
+      unauthorized: "No autorizado"
