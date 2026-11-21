@@ -20,11 +20,24 @@ class User < ApplicationRecord
   has_many :enrollments, dependent: :destroy
   has_many :courses, dependent: :destroy # Cursos que dicta si es profesor
   has_many :enrolled_courses, through: :enrollments, source: :course # Cursos en los que es estudiante
+  has_many :user_progresses, dependent: :destroy
 
   has_one_attached :avatar
 
+  # Método: as_json
+  # Descripción: Serializa el modelo a formato JSON garantizando la exclusión permanente de password_digest
+  # y agregando la URL pública/directa del avatar si está adjunto.
+  # Parámetros: options (Hash)
+  # Retorna: Hash serializable a JSON sin password_digest.
   def as_json(options = {})
-    super(options).merge({
+    options = (options || {}).deep_dup
+    except_fields = Array(options[:except]).map(&:to_sym) | [:password_digest]
+    options[:except] = except_fields
+
+    result = super(options)
+    result.delete('password_digest')
+    result.delete(:password_digest)
+    result.merge({
       avatar_url: avatar.attached? ? Rails.application.routes.url_helpers.rails_blob_url(avatar, only_path: true) : self[:avatar_url]
     })
   end

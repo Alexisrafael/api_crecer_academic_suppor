@@ -1,7 +1,32 @@
 es:
   api:
     auth:
-      invalid_email_password: "Correo o contraseña inválidos"
-      invalid_token_type: "Tipo de token inválido"
-      invalid_or_expired_refresh_token: "Token de refresco inválido o expirado"
-      unauthorized: "No autorizado"
+      invalid_email_password: "¡Ups! El correo o la contraseña no coinciden. Revisa tus datos e inténtalo de nuevo."
+      invalid_token_type: "El pase de acceso no es válido para esta aventura."
+      invalid_or_expired_refresh_token: "Tu sesión ha expirado por seguridad. ¡Inicia sesión de nuevo para continuar aprendiendo!"
+      unauthorized: "¡Hola! Para explorar esta parte del aula debes iniciar sesión."
+      logout_success: "¡Sesión cerrada con éxito! Te esperamos pronto de vuelta para seguir aprendiendo."
+    subjects:
+      not_found: "¡Vaya! No encontramos la materia que buscas. ¿Exploramos otra?"
+      unauthorized: "Solo los profesores o administradores pueden organizar las materias."
+      created_success: "¡Materia creada exitosamente!"
+      updated_success: "¡Materia actualizada exitosamente!"
+    courses:
+      not_found: "No encontramos la clase indicada. ¡Verifica el enlace o busca otra clase!"
+      no_active_course: "El profesor aún no ha publicado una clase para esta materia. ¡Vuelve pronto!"
+      enrolled_success: "¡Fantástico! Ya estás inscrito en esta clase. ¡A aprender!"
+      teacher_required: "Esta sección es solo para que los profesores organicen sus clases."
+      forbidden: "No tienes permiso para modificar esta clase."
+    lessons:
+      not_found: "¡Vaya! No encontramos esa lección. ¿Probamos con otra clase?"
+      forbidden_create: "Solo el profesor titular o un administrador puede agregar clases a este curso."
+      forbidden_edit: "Solo el profesor de este curso puede editar esta clase."
+      forbidden_delete: "Solo el profesor de este curso puede eliminar esta clase."
+    activities:
+      not_found: "No encontramos la práctica o juego interactivo."
+      forbidden: "Solo el profesor o un administrador puede gestionar las prácticas de esta clase."
+      created_success: "¡Genial! Tu nuevo juego educativo está listo para que todos practiquen."
+      deleted_success: "Práctica eliminada correctamente."
+    progress:
+      missing_identifier: "¡Ups! Debes indicar una lección o una práctica para guardar tu avance."
+      saved_success: "¡Excelente esfuerzo! Tu progreso se guardó exitosamente."
