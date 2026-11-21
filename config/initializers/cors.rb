@@ -34,21 +34,12 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
 
       allowed_origins = (default_origins + env_origins + credential_origins).reject(&:blank?).uniq
 
-      # 1. Coincidencia directa con orígenes permitidos
-      return true if allowed_origins.include?(source_clean)
-
-      # 2. Permitir cualquier subdominio de Vercel (*.vercel.app)
-      return true if source_clean.match?(%r{\Ahttps://([a-zA-Z0-9-]+\.)*vercel\.app\z})
-
-      # 3. IPs privadas locales para pruebas en móviles por WiFi (192.168.x.x o 10.x.x.x)
-      return true if source_clean.match?(%r{\Ahttps?://(192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+)(:\d+)?\z})
-
-      # 4. En desarrollo permite cualquier puerto en localhost / 127.0.0.1
-      if Rails.env.development? && source_clean.match?(%r{\Ahttps?://(localhost|127\.0\.0\.1)(:\d+)?\z})
-        return true
-      end
-
-      false
+      # En bloques de Ruby no se usa 'return' (provoca LocalJumpError).
+      # Se evalúa la condición booleana directamente:
+      allowed_origins.include?(source_clean) ||
+        source_clean.match?(%r{\Ahttps://([a-zA-Z0-9-]+\.)*vercel\.app\z}) ||
+        source_clean.match?(%r{\Ahttps?://(192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+)(:\d+)?\z}) ||
+        (Rails.env.development? && source_clean.match?(%r{\Ahttps?://(localhost|127\.0\.0\.1)(:\d+)?\z}))
     end
 
     resource '*',
